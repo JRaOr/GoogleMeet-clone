@@ -30,37 +30,37 @@ export default function Topbar({ hidden }) {
         {
             name: "Gmail",
             image: "/media/Logos/Gmail-Logo.png",
-            link: "https://gmail-clone-livid.vercel.app/"
+            link: "https://gmailclone.gerardoraor.com/"
         },
         {
             name: "Airbnb",
             image: "/media/Logos/Airbnb-Logo.png",
-            link: "https://airbnb-clone-seven-beta.vercel.app/"
+            link: "https://airbnbclone.gerardoraor.com/"
         },
         {
             name: "Chat",
             image: "/media/Logos/Chat-Logo.png",
-            link: "https://interactive-comments-section-dun.vercel.app/"
+            link: "https://comments-app.gerardoraor.com/"
         },
         {
             name: "Countries",
             image: "/media/Logos/Countries-Logo.png",
-            link: "https://countries-roan.vercel.app/"
+            link: "https://countries.gerardoraor.com/"
         },
         {
             name: "Covid",
             image: "/media/Logos/COVID-Logo.png",
-            link: "https://covid-angular.vercel.app/"
+            link: "https://covid.gerardoraor.com/"
         },
         {
             name: "Advices",
             image: "/media/Logos/Google-New-Logo.png",
-            link: "https://advice-generator-umber.vercel.app/"
+            link: "https://advice-app.gerardoraor.com/"
         },
         {
             name: "Portfolio",
             image: "/media/Logos/Portfolio-Logo.png",
-            link: "https://portafolio-henna.vercel.app/"
+            link: "https://portafolio.gerardoraor.com/"
         }
     ]
     
