@@ -5,9 +5,10 @@ import Api from '../../util/Api';
 import { BsFillMicMuteFill, BsFillMicFill, BsCameraVideoFill, BsCameraVideoOffFill, BsChatLeftText } from "react-icons/bs";
 import { MdCallEnd } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
-import { AiOutlineShareAlt, AiOutlineLink, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineShareAlt, AiOutlineLink, AiOutlineMail, AiOutlineClose, AiOutlineSend} from "react-icons/ai";
 import { showEmailModal } from "../../store/user/actions";
 import { useDispatch } from "react-redux";
+import Comments from "../../components/Comments";
 //Get server side props
 export async function getServerSideProps(context) {
     const { id } = context.query;
@@ -183,15 +184,24 @@ export default function Room( { id } ) {
             </li>
         </ul>
     )
+    const [showChat, setShowChat] = useState(false);
+
+    function handleClose(){
+        setShowChat(false);
+    }
 
     return (
         <div className="h-full w-full bg-[#202124] text-white">
-            <section className="main-content h-[92vh]">
-                <div id='container' className={`${count > 1 ? styles[count]:'h-full w-full relative flex items-center justify-center'}`}>
+            <section className="main-content h-[92vh] flex relative">
+                <div id='container' className={`${count > 1 ? styles[count]:'h-full w-full relative flex items-center justify-center'} ${showChat ? 'p-5':''}`}>
                     <div id='local-video' className={`${count > 1 ? 'hidden':'relative video-big'}`}>
                         {count > 0 && <p className="absolute bottom-5 left-6 font-semibold text-xl">Tu</p>}
                     </div>
+                    {count > 1 && <div className="absolute h-[200px] w-[350px] border-sky-900 z-[4] right-2 bottom-0 border-2 rounded-md overflow-hidden">
+                        <div id='minime' />
+                    </div>}
                 </div>
+                <Comments show={showChat} handleClose={handleClose} />
             </section>
             <section className="relative call-controls h-[8vh] text-white flex justify-between items-center px-5">
                 <h2 className="font-semibold text-xl">{id}</h2>
@@ -221,13 +231,12 @@ export default function Room( { id } ) {
                         <FiUsers/>
                         <p className="absolute text-sm right-0 top-0 font-semibold bg-[#56585a] h-[18px] w-[18px] rounded-full">{count}</p>
                     </button>
-                    <button className={`w-[40px] relative transition-grl h-[40px] rounded-full text-xl flex items-center justify-center`}>
+                    <button onClick={()=>{
+                        setShowChat(!showChat)
+                    }} className={`w-[40px] relative transition-grl h-[40px] rounded-full text-xl flex items-center justify-center`}>
                         <BsChatLeftText/>
                     </button>
                 </div>
-                {count > 1 && <div className="absolute h-[113px] w-[200px] right-2 -top-[120px]">
-                    <div id='minime' />
-                </div>}
             </section>
         </div>
     )
