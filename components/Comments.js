@@ -34,12 +34,13 @@ export default function Comments( { show, handleClose, room_name, user }){
         getFirestoreData();
     },[])
 
-    async function sendMessage(message){
+    async function sendMessage(event){
+        event.preventDefault();
         const updateRef = doc(db, 'chatrooms', room_name[0]);
         const response = await getDoc(updateRef);
         await updateDoc(updateRef, {
             messages: [...response.data().messages, {
-                message: message,
+                message: event.target.comment.value,
                 user: user.username,
                 timestamp: new Date().getTime(),
                 image: user.avatar
@@ -74,14 +75,12 @@ export default function Comments( { show, handleClose, room_name, user }){
                                                 </div>
                                         )})}
                                     </div>
-                                    <div className="flex p-2 grow-[2] bg-slate-200 rounded-md">
-                                        <textarea value={comment} onChange={(e)=>{ setComment(e.target.value) }} className="grow bg-transparent outline-none hide-scroll " placeholder="message"/>
-                                        <div className={`w-[40px] text-2xl cursor-pointer h-[100%] flex items-center justify-center ${comment != '' ? 'text-sky-500' : 'text-slate-600'}`}>
-                                            <AiOutlineSend onClick={()=>{
-                                                sendMessage(comment)
-                                            }}/>
-                                        </div>
-                                    </div>
+                                    <form onSubmit={sendMessage} className="flex p-2 grow-[2] bg-slate-200 rounded-md">
+                                        <input type='text' value={comment} onChange={e => setComment(e.target.value)} name='comment' className="grow bg-transparent outline-none hide-scroll " placeholder="message"/>
+                                        <button disabled={comment.length === 0} type="submit" className={`w-[40px] text-2xl cursor-pointer my-auto flex items-center justify-center ${comment != '' ? 'text-sky-500' : 'text-slate-600'}`}>
+                                            <AiOutlineSend/>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>}
                     </div>
