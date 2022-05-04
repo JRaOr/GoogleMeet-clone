@@ -7,7 +7,7 @@ import { MdCallEnd } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { AiOutlineShareAlt, AiOutlineLink, AiOutlineMail, AiOutlineClose, AiOutlineSend} from "react-icons/ai";
 import { showEmailModal } from "../../store/user/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Comments from "../../components/Comments";
 //Get server side props
 export async function getServerSideProps(context) {
@@ -28,6 +28,7 @@ export default function Room( { id } ) {
     const [count, setCount] = useState(0);
     const [showShareMenu, setShowShareMenu] = useState(false);
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
     async function getAccessToken(){
         if(localStorage.getItem('token')){
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}/room/join/${id}`,{
@@ -201,7 +202,7 @@ export default function Room( { id } ) {
                         <div id='minime' />
                     </div>}
                 </div>
-                <Comments show={showChat} handleClose={handleClose} />
+                <Comments user={user} show={showChat} handleClose={handleClose} room_name={id}/>
             </section>
             <section className="relative call-controls h-[8vh] text-white flex justify-between items-center px-5">
                 <h2 className="font-semibold text-xl">{id}</h2>
