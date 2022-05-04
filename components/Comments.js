@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineSend } from "react-icons/ai";
 import { db } from "../util/firebase";
 import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore'
@@ -6,6 +6,7 @@ export default function Comments( { show, handleClose, room_name, user }){
     const [animationchat, setAnimationchat] = useState(false);
     const [comment, setComment] = useState('');
     const [messages, setMessages] = useState([]);
+    const dummy = useRef(null);
     useEffect(()=>{
         if(!show){
             setAnimationchat(false);
@@ -46,6 +47,7 @@ export default function Comments( { show, handleClose, room_name, user }){
                 image: user.avatar
             }]
         });
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
         setComment('');
     }
     return (
@@ -74,6 +76,7 @@ export default function Comments( { show, handleClose, room_name, user }){
                                                     <p className={`text-sm mt-2 py-2 px-3 rounded-md ${!(!userowns && messages[index - 1]?.user != message.user) ? 'ml-14':''} ${userowns ? 'bg-gray-900':'bg-slate-600'}  text-white`}>{!userowns && `${message.user}:`} {message.message}</p>
                                                 </div>
                                         )})}
+                                        <div ref={dummy}/>
                                     </div>
                                     <form onSubmit={sendMessage} className="flex p-2 grow-[2] bg-slate-200 rounded-md">
                                         <input type='text' value={comment} onChange={e => setComment(e.target.value)} name='comment' className="grow bg-transparent outline-none hide-scroll " placeholder="message"/>
