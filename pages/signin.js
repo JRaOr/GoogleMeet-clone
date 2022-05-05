@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Api from '../util/Api';
-import { signin } from '../store/user/actions';
+import { signin, signout } from '../store/user/actions';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AiFillGithub, AiFillLinkedin, AiFillInstagram, AiFillFacebook} from 'react-icons/ai';
@@ -9,15 +9,21 @@ export default function Signin(){
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const router = useRouter();
+
     useEffect(()=>{
-        const token = localStorage.getItem('token');
-        if(user.userId && token){
-            router.push('/');
+        if(user.token){
+            dispatch(signout())
         }
-    },[user])
+    },[])
+
     async function submit(e){
         e.preventDefault()
-        dispatch(signin(e.target.username.value, e.target.password.value))
+        dispatch(signin(e.target.username.value, e.target.password.value, ()=>{
+            if(router.query.redirect) {
+                router.push(router.query.redirect);
+            } else
+                router.push('/');
+        }))
     }
     const social = [
         { link: 'https://github.com/JRaOR', icon : <AiFillGithub/>, color: 'github'},

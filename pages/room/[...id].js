@@ -125,8 +125,12 @@ export default function Room( { id } ) {
     }
 
     useEffect(()=>{
-        getAccessToken()
-        addLocalVideo()
+        if(localStorage.getItem('token')){
+            getAccessToken()
+            addLocalVideo()
+        } else {
+            router.push(`/signin?redirect=/room/${id}`);
+        }
     }, [])
 
     async function addLocalVideo () {
