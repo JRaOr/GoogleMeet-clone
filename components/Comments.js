@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineSend } from "react-icons/ai";
 import { db } from "../util/firebase";
 import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore'
+import { BsEmojiLaughing } from "react-icons/bs";
+import Picker, { SKIN_TONE_MEDIUM_DARK } from 'emoji-picker-react';
+
 export default function Comments( { show, handleClose, room_name, user }){
     const [animationchat, setAnimationchat] = useState(false);
     const [comment, setComment] = useState('');
     const [messages, setMessages] = useState([]);
     const dummy = useRef(null);
+    const [showEmojis, setShowEmojis] = useState(false);
     useEffect(()=>{
         if(!show){
             setAnimationchat(false);
@@ -35,6 +39,11 @@ export default function Comments( { show, handleClose, room_name, user }){
         getFirestoreData();
     },[])
 
+    useEffect(()=>{
+        if(dummy.current !== null)
+            dummy.current.scrollIntoView({ behavior: 'smooth' });
+    },[messages])
+
     async function sendMessage(event){
         event.preventDefault();
         const updateRef = doc(db, 'chatrooms', room_name[0]);
@@ -47,9 +56,15 @@ export default function Comments( { show, handleClose, room_name, user }){
                 image: user.avatar
             }]
         });
+        setShowEmojis(false);
         dummy.current.scrollIntoView({ behavior: 'smooth' });
         setComment('');
     }
+
+    function onEmojiClick(event, emojiObject){
+        setComment(comment + emojiObject.emoji);
+    }
+
     return (
         <>
             { show ?
@@ -67,7 +82,7 @@ export default function Comments( { show, handleClose, room_name, user }){
                                 </div>
                                 {messages.length === 0 && <p className="w-full bg-slate-200 p-2 text-sm rounded-lg mt-5">Los mensajes solo pueden ser vistos por personas en la llamada y son eliminados cuando la llamada termina.</p>}
                                 <div className="w-full absolute bottom-0 pt-5 flex flex-col">
-                                    <div className="w-full max-h-[70vh] mb-5 overflow-scroll hide-scroll">
+                                    <div className="w-full max-h-[70vh] mb-5 overflow-scroll hide-scroll relative">
                                         {messages.map((message, index)=>{
                                             let userowns = message.user === user.username;
                                             return (
@@ -78,7 +93,22 @@ export default function Comments( { show, handleClose, room_name, user }){
                                         )})}
                                         <div ref={dummy}/>
                                     </div>
-                                    <form onSubmit={sendMessage} className="flex p-2 grow-[2] bg-slate-200 rounded-md">
+                                    <form onSubmit={sendMessage} className="flex p-2 grow-[2] bg-slate-200 rounded-md relative">
+                                        {showEmojis && 
+                                                <div className='w-[278px] h-[318px] -top-[330px] left-0 bg-red-300 absolute'>
+                                                    <Picker
+                                                        onEmojiClick={onEmojiClick}
+                                                        disableAutoFocus={true}
+                                                        skinTone={SKIN_TONE_MEDIUM_DARK}
+                                                        groupNames={{ smileys_people: 'PEOPLE' }}
+                                                        native
+                                                    />
+                                                </div>}
+                                        <div onClick={()=>{
+                                            setShowEmojis(!showEmojis)
+                                        }} className="flex items-center justify-center mr-2 cursor-pointer hover:text-purple-600 transition-grl">
+                                            <BsEmojiLaughing/>
+                                        </div>
                                         <input type='text' value={comment} onChange={e => setComment(e.target.value)} name='comment' className="grow bg-transparent outline-none hide-scroll " placeholder="message"/>
                                         <button disabled={comment.length === 0} type="submit" className={`w-[40px] text-2xl cursor-pointer my-auto flex items-center justify-center ${comment != '' ? 'text-sky-500' : 'text-slate-600'}`}>
                                             <AiOutlineSend/>
