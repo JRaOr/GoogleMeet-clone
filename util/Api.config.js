@@ -8,6 +8,7 @@ export const routes = {
         userImage: '/user/image',
         getUserPicture: '/user/profilePicture',
         sendEmail: '/user/sendEmail',
+        checkUserAvailable: '/user/check/available',
     },
     room: {
         createRoom: '/room/create',

@@ -1,7 +1,7 @@
 import Api from '../../util/Api';
 import * as types from './actionTypes';
 
-export function signin(username, password, callback) {
+export function signin(username, password, callback, errorCallback) {
     return async (dispatch) => {
         const response = await Api.getInstance().SignIn(username, password);
         if (response && response.success) {
@@ -14,7 +14,9 @@ export function signin(username, password, callback) {
                 name: response.data.name
             }
             dispatch({ type: types.LOGIN_SUCCESS, payload: data });
-            callback();
+            if(callback) callback();
+        } else {
+            if(errorCallback) errorCallback(response.message);
         }
     }
 }

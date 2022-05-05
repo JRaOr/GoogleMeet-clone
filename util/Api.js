@@ -67,6 +67,15 @@ class Api {
         }
     }
 
+    checkUserAvailable = async (username) => {
+        try {
+            const response = await this.base.get(`${routes.user.checkUserAvailable}/${username}`);
+            return {success: true, data: response.data};
+        } catch (error) {
+            return {success: false, data: error.message};
+        }
+    }
+
     setUserImage = async (image) => {
         try {
             const data = {
