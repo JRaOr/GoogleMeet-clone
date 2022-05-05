@@ -15,8 +15,8 @@ export default function Topbar({ hidden }) {
     const dispatch = useDispatch()
     const router = useRouter()
     const _renderAvatar = (big) => (
-        <button onClick={()=>{ setMenuProfile(!menuProfile) }} className={`${ big ? 'h-[100px] w-[100px]': 'h-[40px] w-[40px]'} bg-purple-400 rounded-full overflow-hidden cursor-pointer`}>
-            {user.avatar ? <img src={user.avatar} alt="avatar" /> : null}
+        <button onClick={()=>{ setMenuProfile(!menuProfile) }} className={`${ big ? 'h-[100px] w-[100px]': 'h-[40px] w-[40px]'} bg-amber-700 rounded-full overflow-hidden cursor-pointer`}>
+            {user.avatar ? <img src={user.avatar} alt="avatar" /> : <p className={`text-white uppercase font-semibold ${big ? 'text-6xl': 'text-2xl'}`}>{user?.username[0]}</p>}
         </button>
     )
 
@@ -72,12 +72,12 @@ export default function Topbar({ hidden }) {
                         <Link href="/">
                             <img src='/media/Google-Meet-Logo.png' className="h-[35px] object-contain cursor-pointer"/>
                         </Link>
-                        <p className="text-2xl text-gray-500 cursor-default">
+                        <p className="text-2xl text-gray-500 cursor-default hidden md:flex">
                             <span className="font-semibold">Google</span> Meet
                         </p>
                     </div>
                     <div className="flex items-center gap-5">
-                        <p className="text-gray-500 font-normal text-xl cursor-default">
+                        <p className="text-gray-500 font-normal text-xl cursor-default hidden md:flex">
                             <Clock format={'HH:mm A - ddd, D MMM'} ticking={true} />
                         </p>
                         <div className="flex gap-2">
