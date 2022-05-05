@@ -170,7 +170,7 @@ export default function Room( { id } ) {
     const _shareMenu = () => (
         <ul className="cursor-pointer z-10 absolute rounded-md overflow-hidden bottom-0 left-0 bg-white text-slate-800 text-md flex flex-col w-[125px]">
             <li onClick={()=>{
-                const link = `https://meetclone.myowjourney.com/room/${id}`
+                const link = `https://meetclone.gerardoraor.com/room/${id}`
                 navigator.clipboard.writeText(link);
                 setShowShareMenu(false)
             }} className="flex transition-grl items-center py-1 px-2 border-b-[1px] gap-2 hover:bg-slate-100">
