@@ -3,7 +3,9 @@ import { AiOutlineClose, AiOutlineSend } from "react-icons/ai";
 import { db } from "../util/firebase";
 import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore'
 import { BsEmojiLaughing } from "react-icons/bs";
-import Picker, { SKIN_TONE_MEDIUM_DARK } from 'emoji-picker-react';
+import dynamic from 'next/dynamic';
+import ReactTooltip from "react-tooltip";
+const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
 
 export default function Comments( { show, handleClose, room_name, user }){
     const [animationchat, setAnimationchat] = useState(false);
@@ -19,10 +21,8 @@ export default function Comments( { show, handleClose, room_name, user }){
 
     async function getFirestoreData(){
         const chatrooms = collection(db, "chatrooms");
-        console.log(room_name)
         const q = query(chatrooms, where("room_name", "==", room_name[0]));
         const querySnapshot = await getDocs(q);
-        console.log(querySnapshot.size)
         if(querySnapshot.size === 0){
             await setDoc(doc(db, 'chatrooms', room_name[0]), {
                 room_name: room_name[0],
@@ -65,6 +65,11 @@ export default function Comments( { show, handleClose, room_name, user }){
         setComment(comment + emojiObject.emoji);
     }
 
+    function getDate(timestamp){
+        const date = new Date(timestamp);
+        return `${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()} ${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`
+    }
+
     return (
         <>
             { show ?
@@ -87,20 +92,26 @@ export default function Comments( { show, handleClose, room_name, user }){
                                             let userowns = message.user === user.username;
                                             return (
                                                 <div key={`message-${room_name[0]}-${index}`} className={`w-full flex items-end ${userowns ? 'flex-row-reverse':'' }`}>
-                                                    {(!userowns && messages[index - 1]?.user != message.user)  && <img src={message?.image ? message.image : ''} alt="avatar" className="rounded-full w-12 h-12 mr-2 bg-blue-300"/>}
-                                                    <p className={`text-sm mt-2 py-2 px-3 rounded-md ${!(!userowns && messages[index - 1]?.user != message.user) ? 'ml-14':''} ${userowns ? 'bg-gray-900':'bg-slate-600'}  text-white`}>{!userowns && `${message.user}:`} {message.message}</p>
+                                                    {(!userowns && messages[index - 1]?.user != message.user)  && 
+                                                        <> 
+                                                            <img data-tip data-for={`image-tool-${index}`} src={message?.image ? message.image : ''} alt="avatar" className="rounded-full w-12 h-12 mr-2 bg-blue-300"/>
+                                                            <ReactTooltip place="bottom" type="dark" effect="solid" id={`image-tool-${index}`}>
+                                                                <span>{message.user}, {getDate(message.timestamp)}</span>
+                                                            </ReactTooltip>
+                                                        </>}
+                                                    <p data-tip data-for={`comment-tool-${index}`} className={`text-sm mt-2 py-2 px-3 rounded-md ${!(!userowns && messages[index - 1]?.user != message.user) ? 'ml-14':''} ${userowns ? 'bg-gray-900':'bg-slate-600'}  text-white`}>{message.message}</p>
+                                                    <ReactTooltip place={userowns ? "left" : "right"} type="dark" effect="solid" id={`comment-tool-${index}`}>
+                                                        <span>{getDate(message.timestamp)}</span>
+                                                    </ReactTooltip>
                                                 </div>
                                         )})}
                                         <div ref={dummy}/>
                                     </div>
                                     <form onSubmit={sendMessage} className="flex p-2 grow-[2] bg-slate-200 rounded-md relative">
                                         {showEmojis && 
-                                                <div className='w-[278px] h-[318px] -top-[330px] left-0 bg-red-300 absolute'>
+                                                <div className='w-[278px] h-[318px] -top-[330px] left-0 absolute'>
                                                     <Picker
                                                         onEmojiClick={onEmojiClick}
-                                                        disableAutoFocus={true}
-                                                        skinTone={SKIN_TONE_MEDIUM_DARK}
-                                                        groupNames={{ smileys_people: 'PEOPLE' }}
                                                         native
                                                     />
                                                 </div>}
