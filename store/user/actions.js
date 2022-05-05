@@ -58,3 +58,5 @@ export function hideEmailModal() {
 
 export const showProfileModal = (payload) => ({type: types.SHOW_PROFILE_MODAL, payload: payload});
 export const hideProfileModal = (payload) => ({type: types.HIDE_PROFILE_MODAL, payload: payload});
+export const showToast = (payload) => ({type: types.SHOW_TOAST, payload: payload});
+export const hideToast = (payload) => ({type: types.HIDE_TOAST, payload: payload});

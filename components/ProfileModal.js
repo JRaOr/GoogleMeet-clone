@@ -2,7 +2,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { AiOutlineClose, AiOutlineEdit, AiOutlineArrowLeft, AiOutlineSearch } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { fillUser, hideProfileModal } from '../store/user/actions';
+import { fillUser, hideProfileModal, showToast } from '../store/user/actions';
 import { useEffect, useState } from 'react';
 import { HiDesktopComputer } from 'react-icons/hi';
 import { IoMdColorPalette } from 'react-icons/io';
@@ -17,9 +17,23 @@ export default function ProfileModal({ user }) {
     async function saveUserImage(image) {
         const response = await Api.getInstance().setUserImage(image);
         if (response.success) {
-            dispatch(hideProfileModal());
             dispatch(fillUser())
+            dispatch(showToast({
+                message: 'Imagen actualizada',
+                type: 'success',
+                position: 'bottom-right',
+                icon: '🤖',
+            }))
+        }else{
+            //Fire icon toast
+            dispatch(showToast({
+                message: 'Error al guardar la imagen',
+                type: 'error',
+                position: 'bottom-right',
+                icon: '💥',
+            }))
         }
+        dispatch(hideProfileModal());
     }
 
     async function getDefaultPictures(){

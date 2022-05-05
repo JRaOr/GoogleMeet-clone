@@ -6,7 +6,7 @@ import { BsFillMicMuteFill, BsFillMicFill, BsCameraVideoFill, BsCameraVideoOffFi
 import { MdCallEnd } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { AiOutlineShareAlt, AiOutlineLink, AiOutlineMail, AiOutlineClose, AiOutlineSend} from "react-icons/ai";
-import { showEmailModal } from "../../store/user/actions";
+import { showEmailModal, showToast } from "../../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Comments from "../../components/Comments";
 //Get server side props
@@ -177,6 +177,12 @@ export default function Room( { id } ) {
                 const link = `https://meetclone.gerardoraor.com/room/${id}`
                 navigator.clipboard.writeText(link);
                 setShowShareMenu(false)
+                dispatch(showToast({
+                    message: 'Link copiado al portapapeles',
+                    type: 'success',
+                    icon: '🔗',
+                    position: 'bottom-right'
+                }))
             }} className="flex transition-grl items-center py-1 px-2 border-b-[1px] gap-2 hover:bg-slate-100">
                 <AiOutlineLink/> Get Link
             </li>

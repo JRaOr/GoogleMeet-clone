@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Api from '../util/Api';
-import { signin, signout } from '../store/user/actions';
+import { showToast, signin, signout } from '../store/user/actions';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AiFillGithub, AiFillLinkedin, AiFillInstagram, AiFillFacebook} from 'react-icons/ai';
 import Link from 'next/link';
+import toast, { Toaster } from 'react-hot-toast';
 export default function Signin(){
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
@@ -41,10 +42,18 @@ export default function Signin(){
     async function submit(e){
         e.preventDefault()
         dispatch(signin(e.target.username.value, e.target.password.value, ()=>{
-            if(router.query.redirect) {
-                router.push(router.query.redirect);
-            } else
-                router.push('/');
+            dispatch(showToast({
+                message: 'Bienvenido',
+                type: 'success',
+                position: 'bottom-right',
+                icon: '👏',
+            }))
+            setTimeout(()=>{
+                if(router.query.redirect) {
+                    router.push(router.query.redirect);
+                } else
+                    router.push('/');
+            },1500)
         }, ()=>{
             setError('Usuario o contraseña incorrectos');
             }));

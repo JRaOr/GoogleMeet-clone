@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { signin } from "../store/user/actions";
+import { showToast, signin } from "../store/user/actions";
 import Api from "../util/Api";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -42,7 +42,15 @@ export default function Signup(){
             const response = await Api.getInstance().SignUp(e.target.username.value, e.target.password.value);
             if(response && response.success){
                 dispatch(signin(e.target.username.value, e.target.password.value));
-                router.push('/')
+                dispatch(showToast({
+                    message: 'Usuario creado correctamente',
+                    type: 'success',
+                    icon: '💯',
+                    position: 'bottom-right',
+                }))
+                setTimeout(()=>{
+                    router.push('/')
+                }, 1000)
             }
         }
     }

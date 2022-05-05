@@ -6,7 +6,7 @@ import Link from "next/link"
 import Clock from 'react-live-clock';
 import { useState } from "react"
 import { AiOutlineClose, AiOutlineCamera } from "react-icons/ai"
-import { showProfileModal, signout } from "../store/user/actions"
+import { showProfileModal, showToast, signout } from "../store/user/actions"
 import  { useRouter } from "next/router"
 export default function Topbar({ hidden }) {
     const user = useSelector(state => state.user)
@@ -93,7 +93,7 @@ export default function Topbar({ hidden }) {
                         {_renderAvatar()}
                         {menuActive &&
                         <div className="absolute right-3 top-[80px] menu-meet bg-white">
-                            <div className="flex justify-between"><h4 className="text-xl select-none">My Other Apps</h4> <AiOutlineClose onClick={()=>{
+                            <div className="flex justify-between"><h4 className="text-xl select-none">Mis otras aplicaciones.</h4> <AiOutlineClose onClick={()=>{
                                 setMenuActive(!menuActive)
                             }} className="cursor-pointer"/></div>
                             <div className="divider"/>
@@ -124,6 +124,12 @@ export default function Topbar({ hidden }) {
                                 <button onClick={()=>{
                                     setMenuProfile(!menuProfile)
                                     dispatch(signout())
+                                    dispatch(showToast({
+                                        message: 'Sesión cerrada',
+                                        type: 'success',
+                                        position: 'bottom-right',
+                                        icon: '❗',
+                                    }))
                                     router.push('/signin')
                                 }} className="border-[2px] px-5 py-2 rounded-md text-gray-600 hover:bg-stone-50 font-semibold">
                                     Salir de tu cuenta

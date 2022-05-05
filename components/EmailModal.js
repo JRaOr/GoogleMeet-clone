@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideEmailModal } from '../store/user/actions';
+import { hideEmailModal, showToast } from '../store/user/actions';
 import Api from '../util/Api';
 
 export default function EmailModal({}) {
@@ -25,6 +25,12 @@ export default function EmailModal({}) {
             setMessage('');
             setError('');
             dispatch(hideEmailModal());
+            dispatch(showToast({
+                message: 'Email enviado',
+                type: 'success',
+                position: 'bottom-right',
+                icon: '📧',
+                }));
         } else {
             setError(response.message);
         }
