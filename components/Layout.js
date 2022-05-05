@@ -7,6 +7,7 @@ import ProfileModal from "./ProfileModal"
 import Topbar from "./Topbar"
 import Script from 'next/script'
 import EmailModal from "./EmailModal"
+import Head from "next/head"
 export default function Layout({ children }){
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
@@ -40,6 +41,9 @@ export default function Layout({ children }){
     ]
     return(
         <>
+            <Head>
+                <title>Google Meet Clone</title>
+            </Head>
             <Topbar hidden={routes.includes(router.pathname)}/>
             {user.ux.profileModal && <ProfileModal user={user}/>}
             {user.ux.emailModal.open && <EmailModal/>}

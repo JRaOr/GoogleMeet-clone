@@ -18,9 +18,13 @@ export default function Home(){
         }
     }
 
+    useEffect(()=>{
+        if(!localStorage.getItem('token')) {
+            router.push('/signin')
+        }
+    }, [])
+
     return (
-        <>
-        {user.userId ?
         <div className="flex items-center justify-evenly h-full">
             <section className="px-12 py-4">
                 <div className="w-[100%]  max-w-[560px]">
@@ -56,17 +60,6 @@ export default function Home(){
             <section className="w-[45%]">
                 <Carousel/>
             </section>
-        </div>: 
-        <>
-            <div className="w-full flex flex-col items-center mt-10 gap-5">
-                <p>Tienes que iniciar sesion para poder ver esto.</p>
-                <Link href='/signin'>
-                    <button className="bg-[#1a73e8] hover:bg-[#1a6dde] text-white font-semibold py-2 px-4 rounded flex items-center transition-grl mr-6">
-                        <FaKeyboard className="mr-3"/> Iniciar sesión
-                    </button>
-                </Link>
-            </div>
-        </>}
-        </>
+        </div>
     )
 }
