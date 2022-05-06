@@ -16,7 +16,7 @@ export default function Topbar({ hidden }) {
     const router = useRouter()
     const _renderAvatar = (big) => (
         <button onClick={()=>{ setMenuProfile(!menuProfile) }} className={`${ big ? 'h-[100px] w-[100px]': 'h-[40px] w-[40px]'} bg-amber-700 rounded-full overflow-hidden cursor-pointer`}>
-            {user.avatar ? <img src={user.avatar} alt="avatar" /> : <p className={`text-white uppercase font-semibold ${big ? 'text-6xl': 'text-2xl'}`}>{user?.username[0]}</p>}
+            {user.avatar ? <img src={user.avatar} alt="avatar" /> : <p className={`text-white uppercase font-semibold ${big ? 'text-6xl': 'text-2xl'}`}>{user.username ? user.username[0] : 'G'}</p>}
         </button>
     )
 
