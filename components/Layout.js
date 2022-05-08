@@ -40,6 +40,7 @@ export default function Layout({ children }){
         '/signin',
         '/signup',
         '/room/[...id]',
+        '/room'
     ]
 
     useEffect(()=>{
