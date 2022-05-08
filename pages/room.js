@@ -15,11 +15,13 @@ import { BsFillMicFill, BsFillMicMuteFill, BsCameraVideoFill, BsCameraVideoOffFi
 
 const Video = require("twilio-video");
 export default function Room() {
-    const { room, isConnecting, connect } = useRoom()
+    const { localTracks, getLocalAudioTrack, getLocalVideoTrack, removeLocalAudioTrack, removeLocalVideoTrack } = useLocalTracks();
+    const { room, isConnecting, connect } = useRoom(localTracks, ()=>{
+        console.error("Could not connect to room");
+    }, {})
     const roomState = useRoomState(room);
     const dominantSpeaker = useDominantSpeaker(room);
     const participants = useParticipants(room);
-    const { localTracks, getLocalAudioTrack, getLocalVideoTrack, removeLocalAudioTrack, removeLocalVideoTrack } = useLocalTracks();
     const videoTrack = localTracks.find(
         track => !track.name.includes("screen") && track.kind === "video"
     )

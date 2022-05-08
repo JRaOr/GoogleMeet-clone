@@ -1,12 +1,12 @@
+import { useEffect } from 'react';
+import TrackVideoParticipant from './TrackVideoParticipant';
 export default function RoomComponent( { room, participants } ) {
     if(participants.length === 0) return null;
     return(
-        <div>
-            {participants.map(participant => {
+        <div className={`participants-grid  participants-${participants.length}`}>
+            {participants.map((participant, index)=> {
                 return(
-                    <div key={participant.sid}>
-                        {participant.identity}
-                    </div>
+                    <TrackVideoParticipant key={`participant-box-${participant.sid}`} participant={participant} index={index}/>
                 )
             })}
         </div>
