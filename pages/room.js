@@ -12,6 +12,8 @@ import Controls from "../components/Controls";
 import useLocalVideoToggle from "../hooks/useLocalVideoToggle";
 import useLocalAudioToggle from "../hooks/useLocalAudioToggle";
 import { BsFillMicFill, BsFillMicMuteFill, BsCameraVideoFill, BsCameraVideoOffFill, BsChatLeftText} from 'react-icons/bs';
+import Comments from "../components/Comments";
+import { useSelector } from "react-redux";
 
 const Video = require("twilio-video");
 export default function Room() {
@@ -27,7 +29,8 @@ export default function Room() {
     )
     const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle( room, localTracks, getLocalVideoTrack, removeLocalVideoTrack)
     const [isAudioEnabled, toggleAudioEnabled] = useLocalAudioToggle( localTracks )
-
+    const [showChat, setShowChat] = useState(true)
+    const user = useSelector(state => state.user)
 
     const toggleVideoButton = () => (
         <button onClick={()=>{
@@ -67,14 +70,25 @@ export default function Room() {
         connect(response.data.token);
     }
 
+    const handleClose = () => {
+        setShowChat(false)
+    }
+
+    const toggleChat = () => {
+        setShowChat(!showChat)
+    }
+
     return (
         <>
             {roomState === 'disconnected' ? 
                 <ConfigScreen toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} joinRoom={joinRoom} track={videoTrack} isLocal/>
                 :
                 <RoomContainer>
-                    <RoomComponent participants={participants} room={room}/>
-                    <Controls toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} room={room}/>
+                    <div className="h-full flex">
+                        <RoomComponent showChat={showChat} user={user} track={videoTrack} participants={participants} room={room}/>
+                        <Comments show={showChat} handleClose={handleClose} user={user} room_name={room.name}/>
+                    </div>
+                    <Controls participants={participants.length + 1} toggleChat={toggleChat} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} room={room}/>
                 </RoomContainer >
             }
         </>
