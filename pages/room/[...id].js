@@ -89,7 +89,7 @@ export default function Room({ id }) {
     return (
         <>
             {roomState === 'disconnected' ? 
-                <ConfigScreen toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} joinRoom={joinRoom} track={videoTrack} isLocal/>
+                <ConfigScreen localTracks={localTracks} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} joinRoom={joinRoom} track={videoTrack} isLocal/>
                 :
                 <RoomContainer>
                     <div className="h-full flex">
