@@ -115,6 +115,26 @@ class Api {
         }
     }
 
+    uploadUserImage = async (file) => {
+        try {
+            const body = new FormData();
+            body.append('file', file);
+            const response = await this.base.post(routes.user.uploadUserImage, body);
+            return {success: true, data: response.data};
+        } catch (error) {
+            return {success: false, data: error.message};
+        }
+    }
+
+    removeUserImage = async () => {
+        try {
+            const response = await this.base.delete(routes.user.removeUserImage);
+            return {success: true, data: response.data};
+        } catch (error) {
+            return {success: false, data: error.message};
+        }
+    }
+
     getUserPicture = async (username) => {
         try {
             const response = await this.base.get(routes.user.getUserPicture + `/${username}`);

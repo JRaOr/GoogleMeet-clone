@@ -1,5 +1,5 @@
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { AiOutlineClose, AiOutlineEdit, AiOutlineArrowLeft, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineEdit, AiOutlineArrowLeft, AiOutlineSearch, AiOutlineUpload} from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { fillUser, hideProfileModal, showToast } from '../store/user/actions';
@@ -13,7 +13,7 @@ export default function ProfileModal({ user }) {
     const [menu, setMenu] = useState('picture');
     const [searchFocus, setSearchFocus] = useState(false);
     const [pictures, setPictures] = useState([]);
-
+    const [file, setFile] = useState(null);
     async function saveUserImage(image) {
         const response = await Api.getInstance().setUserImage(image);
         if (response.success) {
@@ -46,6 +46,60 @@ export default function ProfileModal({ user }) {
     useEffect(()=>{
         getDefaultPictures();
     },[])
+
+    async function removeProfileImage () {
+        const response = await Api.getInstance().removeUserImage();
+        if (response.success) {
+            dispatch(fillUser())
+            dispatch(showToast({
+                message: 'Imagen eliminada',
+                type: 'success',
+                position: 'bottom-right',
+                icon: '🤖',
+            }))
+        } else {
+            //Fire icon toast
+            dispatch(showToast({
+                message: 'Error al eliminar la imagen',
+                type: 'error',
+                position: 'bottom-right',
+                icon: '💥',
+            }))
+        }
+    }
+
+    async function uploadUserImage() {
+        if(file === null) {
+            dispatch(showToast({
+                message: 'Elige una imagen para subir!',
+                type: 'error',
+                position: 'bottom-right',
+                icon: '💥',
+            }))
+            return;
+        }
+        const response = await Api.getInstance().uploadUserImage(file);
+        console.log(response)
+        if (response.success) {
+            dispatch(fillUser())
+            dispatch(showToast({
+                message: 'Imagen actualizada',
+                type: 'success',
+                position: 'bottom-right',
+                icon: '🤖',
+            }))
+        } else {
+            //Fire icon toast
+            dispatch(showToast({
+                message: 'Error al guardar la imagen',
+                type: 'error',
+                position: 'bottom-right',
+                icon: '💥',
+            }))
+        }
+        dispatch(hideProfileModal());
+        setFile(null);
+    }
     
     return(
         <div className="modal-container">
@@ -86,7 +140,7 @@ export default function ProfileModal({ user }) {
                         }} className='w-[48%] transition-grl border-[1px] py-2 rounded-md flex items-center justify-center gap-2 font-semibold text-sky-200 hover:text-sky-400'>
                             <AiOutlineEdit/>Cambiar
                         </button>
-                        <button className='w-[48%] transition-grl border-[1px] py-2 rounded-md flex items-center justify-center gap-2 font-semibold text-sky-200 hover:text-red-400'>
+                        <button onClick={() => removeProfileImage()} className='w-[48%] transition-grl border-[1px] py-2 rounded-md flex items-center justify-center gap-2 font-semibold text-sky-200 hover:text-red-400'>
                             <BsTrash/>Quitar
                         </button>
                     </div>
@@ -131,7 +185,16 @@ export default function ProfileModal({ user }) {
                             </div>
                         </div>}
                     {menu === 'computer' &&
-                        <div>
+                        <div className='mt-5 flex flex-col items-center'>
+                            <div className='h-72 flex items-center justify-center mb-5'>
+                                {file && <img className='h-72 w-72 border-white overflow-hidden' src={URL.createObjectURL(file)} alt='picture'/>}
+                            </div>
+                            <input type='file' onChange={(e)=>{
+                                setFile(e.target.files[0])
+                            }} />
+                            <button onClick={() => uploadUserImage()} className='w-[48%] mt-5  transition-grl border-[1px] py-2 rounded-md flex items-center justify-center gap-2 font-semibold text-sky-200 hover:text-sky-400'>
+                                <AiOutlineUpload/>Upload
+                            </button>
                         </div>}
 
                 </div>}

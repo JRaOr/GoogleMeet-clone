@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { LocalAudioTrack, LocalVideoTrack, RemoteAudioTrack, RemoteVideoTrack } from 'twilio-video';
 
 export default function useIsTrackEnabled(track) {
     const [isEnabled, setIsEnabled] = useState(track ? track.isEnabled : false);

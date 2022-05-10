@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { LocalTrackPublication, Participant, RemoteTrackPublication } from 'twilio-video';
-
 
 export default function usePublications(participant) {
     const [publications, setPublications] = useState([]);

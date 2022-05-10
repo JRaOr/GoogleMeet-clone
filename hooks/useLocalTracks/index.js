@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import Video, { LocalVideoTrack, LocalAudioTrack, CreateLocalTrackOptions } from 'twilio-video';
+import Video from 'twilio-video';
 import { DEFAULT_VIDEO_CONSTRAINTS, SELECTED_VIDEO_INPUT_KEY } from "../../util/constants";
 import { getDeviceInfo } from "../../util/functions";
 export default function useLocalTracks() {

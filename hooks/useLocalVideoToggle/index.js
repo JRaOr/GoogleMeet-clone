@@ -1,4 +1,3 @@
-import { LocalVideoTrack } from 'twilio-video';
 import { useCallback, useState } from 'react';
 export default function useLocalVideoToggle(room, localTracks,  getLocalVideoTrack, removeLocalVideoTrack) {
     const localParticipant = room?.localParticipant;
