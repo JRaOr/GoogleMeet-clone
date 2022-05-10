@@ -94,7 +94,7 @@ export default function Comments( { show, handleClose, room_name, user }){
                                                 <div key={`message-${room_name[0]}-${index}`} className={`w-full flex items-end ${userowns ? 'flex-row-reverse':'' }`}>
                                                     {(!userowns && messages[index - 1]?.user != message.user)  && 
                                                         <> 
-                                                            <img data-tip data-for={`image-tool-${index}`} src={message?.image ? message.image : ''} alt="avatar" className="rounded-full w-12 h-12 mr-2 bg-blue-300"/>
+                                                            <img data-tip data-for={`image-tool-${index}`} src={message?.image ? message.image : '/media/profile.png'} className="rounded-full w-12 h-12 mr-2 bg-blue-300"/>
                                                             <ReactTooltip place="bottom" type="dark" effect="solid" id={`image-tool-${index}`}>
                                                                 <span>{message.user}, {getDate(message.timestamp)}</span>
                                                             </ReactTooltip>

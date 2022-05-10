@@ -14,7 +14,9 @@ import useLocalAudioToggle from "../../hooks/useLocalAudioToggle";
 import { BsFillMicFill, BsFillMicMuteFill, BsCameraVideoFill, BsCameraVideoOffFill, BsChatLeftText} from 'react-icons/bs';
 import Comments from "../../components/Comments";
 import { useSelector } from "react-redux";
-
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { showToast } from "../../store/user/actions";
 export async function getServerSideProps(context) {
     const { id } = context.query;
     return {
@@ -25,6 +27,8 @@ export async function getServerSideProps(context) {
 }
 
 export default function Room({ id }) {
+    const router = useRouter();
+    const dispatch = useDispatch();
     const { localTracks, getLocalAudioTrack, getLocalVideoTrack, removeLocalAudioTrack, removeLocalVideoTrack } = useLocalTracks();
     const { room, isConnecting, connect } = useRoom(localTracks, ()=>{
         console.error("Could not connect to room");
@@ -57,8 +61,12 @@ export default function Room({ id }) {
     )
 
     useEffect(() => {
-        getLocalVideoTrack()
-        getLocalAudioTrack()
+        if(localStorage.getItem('token')){
+            getLocalVideoTrack()
+            getLocalAudioTrack()
+        } else {
+            router.push('/signin')
+        }
     }, [])
 
     useEffect(() => {
@@ -75,7 +83,17 @@ export default function Room({ id }) {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
-        connect(response.data.token);
+        if(response.data?.token){
+            connect(response.data.token);
+        } else {
+            dispatch(showToast({
+                message: 'Error al unirse a la sala',
+                type: 'error',
+                position: 'bottom-right',
+                icon: '💥',
+            }))
+            router.push('/')
+        }
     }
 
     const handleClose = () => {
