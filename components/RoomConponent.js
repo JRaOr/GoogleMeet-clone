@@ -18,7 +18,7 @@ export default function RoomComponent( { room, participants, track, user, showCh
         <>
             { track ? <video className="h-[100%] object-cover" ref={videoRef}/> :
             <div className="w-[100%] h-[100%] flex items-center justify-center">
-                <img src={user.avatar} alt="avatar" className="w-[150px] h-[150px] object-cover rounded-full"/>
+                <img src={user.avatar ? user.avatar : '/media/profile.png'} className="w-[150px] h-[150px] object-cover rounded-full"/>
             </div>}
         </>
     )
