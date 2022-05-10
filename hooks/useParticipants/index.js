@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import useDominantSpeaker from "../useDominantSpeaker";
 
 export default function useParticipants(room) {
-    console.log('Start room:', room?.participants)
     const dominantSpeaker = useDominantSpeaker();
     const [participants, setParticipants] = useState(Array.from(room?.participants.values() ?? []));
 

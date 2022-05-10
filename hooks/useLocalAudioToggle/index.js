@@ -3,7 +3,7 @@ import useIsTrackEnabled from '../useIsTrackEnabled';
 
 export default function useLocalAudioToggle( localTracks ) {
     console.log('localTracks: ', localTracks);
-    const audioTrack = localTracks.find(track => track.kind === 'audio');
+    const audioTrack = localTracks?.find(track => track.kind === 'audio');
     const isEnabled = useIsTrackEnabled(audioTrack);
 
     const toggleAudioEnabled = useCallback(() => {

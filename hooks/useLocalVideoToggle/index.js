@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 export default function useLocalVideoToggle(room, localTracks,  getLocalVideoTrack, removeLocalVideoTrack) {
     const localParticipant = room?.localParticipant;
-    const videoTrack = localTracks.find(
+    const videoTrack = localTracks?.find(
         track => !track.name.includes('screen') && track.kind === 'video'
     )
     const [isPublishing, setIsPublishing] = useState(false);

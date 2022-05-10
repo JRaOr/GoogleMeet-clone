@@ -15,7 +15,6 @@ import { BsFillMicFill, BsFillMicMuteFill, BsCameraVideoFill, BsCameraVideoOffFi
 import Comments from "../components/Comments";
 import { useSelector } from "react-redux";
 
-const Video = require("twilio-video");
 export default function Room() {
     const { localTracks, getLocalAudioTrack, getLocalVideoTrack, removeLocalAudioTrack, removeLocalVideoTrack } = useLocalTracks();
     const { room, isConnecting, connect } = useRoom(localTracks, ()=>{
@@ -24,7 +23,7 @@ export default function Room() {
     const roomState = useRoomState(room);
     const dominantSpeaker = useDominantSpeaker(room);
     const participants = useParticipants(room);
-    const videoTrack = localTracks.find(
+    const videoTrack = localTracks?.find(
         track => !track.name.includes("screen") && track.kind === "video"
     )
     const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle( room, localTracks, getLocalVideoTrack, removeLocalVideoTrack)

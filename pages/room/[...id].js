@@ -32,7 +32,7 @@ export default function Room({ id }) {
     const roomState = useRoomState(room);
     const dominantSpeaker = useDominantSpeaker(room);
     const participants = useParticipants(room);
-    const videoTrack = localTracks.find(
+    const videoTrack = localTracks?.find(
         track => !track.name.includes("screen") && track.kind === "video"
     )
     const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle( room, localTracks, getLocalVideoTrack, removeLocalVideoTrack)

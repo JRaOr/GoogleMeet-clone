@@ -9,7 +9,7 @@ export default function ConfigScreen( { joinRoom, track, isLocal, priority, togg
     const videoRef = useRef(null)
     const { audioInputDevices } = useDevices();
     const user = useSelector(state => state.user)
-    const localAudioTrack = localTracks.find(track => track.kind === 'audio');
+    const localAudioTrack = localTracks?.find(track => track.kind === 'audio');
     const mediaStreamTrack = useMediaStreamTrack(localAudioTrack);
     const localAudioInputDeviceId = mediaStreamTrack?.getSettings().deviceId;
 
