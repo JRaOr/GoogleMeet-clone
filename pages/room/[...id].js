@@ -120,7 +120,7 @@ export default function Room({ id }) {
                 :
                 <RoomContainer>
                     <div className={`h-full flex relative items-center`}>
-                        <RoomComponent showChat={showChat} user={user} track={videoTrack} participants={participants.length > 0 ? multiplicateParticipants(participants, 10): participants} room={room}/>
+                        <RoomComponent showChat={showChat} user={user} track={videoTrack} participants={participants} room={room}/>
                         <Comments show={showChat} handleClose={handleClose} user={user} room_name={room.name}/>
                     </div>
                     <Controls participants={participants.length + 1} toggleChat={toggleChat} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} room={room}/>
