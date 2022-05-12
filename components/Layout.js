@@ -57,6 +57,8 @@ export default function Layout({ children }){
         <>
             <Head>
                 <title>Google Meet Clone</title>
+                <meta name="description" content="Clon de Google Meet para participar en la Twilio Hackathon!"/>
+                <meta name="author" content="Gerardo Ramirez"></meta>
             </Head>
             <Topbar hidden={routes.includes(router.pathname)}/>
             {user.ux.profileModal && <ProfileModal user={user}/>}
