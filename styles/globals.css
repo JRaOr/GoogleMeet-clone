@@ -276,10 +276,10 @@
 }
 
 .participants-grid{
-    height: calc(100vh - 100px);
     max-height: calc(100vh - 100px);
     display: grid;
     width: 100%;
+    @apply px-5;
 }
 
 .participants-1{
@@ -288,56 +288,18 @@
 }
 
 .participants-2{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .participants-3{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows:  repeat(auto-fit, 283px);
 }
 
 .participants-4{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows:  repeat(auto-fit, 283px);
 }
-
-.participants-5{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-}
-
-.participants-6{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr  1fr;
-}
-.participants-7{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr  1fr;
-}
-
-.participants-8{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
-.participants-9{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-.participants-10{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-.participants-11{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-.participants-12{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
 
 .center-video{
     object-fit: cover;

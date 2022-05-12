@@ -18,9 +18,7 @@ const colors =[
     "#ffd740",
     "#ffab40",
 ]
-export default function TrackVideoParticipant({ participant, index }) {
-    const conatinerRef = useRef(null);
-    const contentRef = useRef(null);
+export default function TrackVideoParticipant({ participant, index, onlyAudio }) {
     const publications = usePublications(participant);
     const [avatar, setAvatar] = useState(null);
 
@@ -38,24 +36,28 @@ export default function TrackVideoParticipant({ participant, index }) {
     }, [])
 
     useEffect(() => {
-        if (conatinerRef.current !== null) {
-            console.log("containerRef:", conatinerRef.current.getBoundingClientRect());
-        }
         const element = document.getElementById(`img-participant-${participant.sid}`);
         if (element !== null) {
             element.style.borderColor = colors[index];
         }
     }, [])
-    
-    return (
-        <div ref={conatinerRef} className="h-full w-full overflow-hidden p-2">
-            <div className="border-2 rounded-xl border-[#000000] bg-[#18191b] flex items-center justify-center h-full w-full relative" ref={contentRef}>
-                <p className="z-[3] absolute text-white text-4xl font-semibold left-5 bottom-5">{participant.identity}</p>
-                {publications.map((publication, index)=> (
-                    <Publication key={`publication-${index}`} publication={publication}/>
+
+    if (onlyAudio) {
+        return (
+            <>
+                {publications.map((publication, index) => (
+                    <Publication key={`publication-onlyaudio-${index}`} publication={publication} onlyAudio={onlyAudio}/>
                 ))}
-                <img id={`img-participant-${participant.sid}`} className={`h-full w-full z-[1] max-w-[150px] max-h-[150px] rounded-full absolute border-4`} src={avatar ? avatar:'/media/profile.png'}/>    
-            </div>
+            </>
+        )
+    }
+    return (
+        <div className="rounded-md border-2 border-transparent overflow-hidden bg-[#36373a] flex items-center justify-center h-full w-full relative max-w-[504px] max-h-[283px] my-auto mx-auto min-h-[250px]">
+            <p className="z-[3] absolute text-white text-xl left-2 bottom-2">{participant.identity}</p>
+            {publications.map((publication, index)=> (
+                <Publication key={`publication-${index}`} publication={publication}/>
+            ))}
+            <img id={`img-participant-${participant.sid}`} className={`h-full w-full z-[1] max-w-[150px] max-h-[150px] rounded-full absolute`} src={avatar ? avatar:'/media/profile.png'}/>    
         </div>
     )
 }

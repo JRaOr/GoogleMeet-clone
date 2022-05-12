@@ -41,7 +41,7 @@ export default function Room({ id }) {
     )
     const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle( room, localTracks, getLocalVideoTrack, removeLocalVideoTrack)
     const [isAudioEnabled, toggleAudioEnabled] = useLocalAudioToggle( localTracks )
-    const [showChat, setShowChat] = useState(true)
+    const [showChat, setShowChat] = useState(false)
     const user = useSelector(state => state.user)
 
     const toggleVideoButton = () => (
@@ -104,14 +104,23 @@ export default function Room({ id }) {
         setShowChat(!showChat)
     }
 
+    function multiplicateParticipants(participants, number){
+        let newParticipants = []
+        for(let i = 0; i < number; i++){
+            newParticipants.push(participants[0])
+        }
+        return newParticipants
+    }
+
+
     return (
         <>
             {roomState === 'disconnected' ? 
                 <ConfigScreen localTracks={localTracks} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} joinRoom={joinRoom} track={videoTrack} isLocal/>
                 :
                 <RoomContainer>
-                    <div className="h-full flex">
-                        <RoomComponent showChat={showChat} user={user} track={videoTrack} participants={participants} room={room}/>
+                    <div className={`h-full flex relative items-center`}>
+                        <RoomComponent showChat={showChat} user={user} track={videoTrack} participants={participants.length > 0 ? multiplicateParticipants(participants, 10): participants} room={room}/>
                         <Comments show={showChat} handleClose={handleClose} user={user} room_name={room.name}/>
                     </div>
                     <Controls participants={participants.length + 1} toggleChat={toggleChat} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} room={room}/>
