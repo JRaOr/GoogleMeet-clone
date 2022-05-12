@@ -52,15 +52,7 @@ export default function Room() {
         getLocalAudioTrack()
     }, [])
 
-    useEffect(() => {
-        console.log('participants:', participants)
-    }, [participants])
-
-    useEffect(() => {
-        console.log('Room:', room)
-    }, [room?.participants])
     async function joinRoom() {
-        console.log('Joining room...');
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}/room/join/main-room`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`

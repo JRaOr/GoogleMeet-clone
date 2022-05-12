@@ -15,20 +15,16 @@ export default function useParticipants(room) {
     }, [dominantSpeaker]);
     useEffect(() => {
         if(room){
-            console.log('Room participants:', room.participants)
             const newParticipants = Array.from(room.participants.values())
             
             if(newParticipants.length !== participants.length){
-                console.log('New participants:', newParticipants)
                 setParticipants(newParticipants)
             }
 
             const participantConnected = (participant) => {
-                console.log('participant connected:', participant)
                 setParticipants(prevParticipants => [...prevParticipants, participant]);
             }
             const participantDisconnected = (participant) => {
-                console.log('participant disconnected:', participant)
                 setParticipants(prevParticipants => prevParticipants.filter(p => p !== participant));
             }
             room.on('participantConnected', participantConnected);

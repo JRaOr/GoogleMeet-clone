@@ -25,7 +25,6 @@ export default function Layout({ children }){
                 dispatch(fillUser())
             }
         } else {
-            console.log('Token expired');
             dispatch(signout());
         }
     }

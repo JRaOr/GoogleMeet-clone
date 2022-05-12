@@ -18,7 +18,7 @@ const colors =[
     "#ffd740",
     "#ffab40",
 ]
-export default function TrackVideoParticipant({ participant, index, onlyAudio }) {
+export default function TrackVideoParticipant({ participant, index, onlyAudio, dominant }) {
     const publications = usePublications(participant);
     const [avatar, setAvatar] = useState(null);
 
@@ -52,7 +52,7 @@ export default function TrackVideoParticipant({ participant, index, onlyAudio })
         )
     }
     return (
-        <div className="rounded-md border-2 border-transparent overflow-hidden bg-[#36373a] flex items-center justify-center h-full w-full relative max-w-[504px] max-h-[283px] my-auto mx-auto min-h-[250px]">
+        <div className={`rounded-md border-2 ${dominant ? 'border-blue-800' :'border-transparent'} border-transparent overflow-hidden bg-[#36373a] flex items-center justify-center h-full w-full relative max-w-[504px] max-h-[283px] my-auto mx-auto min-h-[250px]`}>
             <p className="z-[3] absolute text-white text-xl left-2 bottom-2">{participant.identity}</p>
             {publications.map((publication, index)=> (
                 <Publication key={`publication-${index}`} publication={publication}/>

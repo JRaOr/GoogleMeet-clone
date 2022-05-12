@@ -7,7 +7,6 @@ export default function useLocalVideoToggle(room, localTracks,  getLocalVideoTra
     const [isPublishing, setIsPublishing] = useState(false);
 
     const toggleVideoEnabled = useCallback(() => {
-        console.log('toggleVideoEnabled');
         if(!isPublishing){
             if (videoTrack) {
                 const locacalTrackPublication = localParticipant?.unpublishTrack(videoTrack);

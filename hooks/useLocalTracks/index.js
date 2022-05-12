@@ -8,7 +8,6 @@ export default function useLocalTracks() {
     const [isAcquiringLocalTracks, setIsAcquiringLocalTracks] = useState(false);
     
     const getLocalAudioTrack = useCallback((deviceId) => {
-        console.log('Getting local audio track...');
         const options = {}
         if(deviceId) {
             options.deviceId = { exact: deviceId };
@@ -20,7 +19,6 @@ export default function useLocalTracks() {
     }, []);
 
     const getLocalVideoTrack = useCallback( async () =>{
-        console.log('Getting local video track...');
         const selectedVideoDeviceId = window.localStorage.getItem(SELECTED_VIDEO_INPUT_KEY)
         const { videoInputDevices } = await getDeviceInfo();
         const hasSelectedVideoDevice = videoInputDevices.some(device => selectedVideoDeviceId && device.deviceId === selectedVideoDeviceId);

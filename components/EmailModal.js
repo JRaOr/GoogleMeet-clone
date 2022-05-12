@@ -19,7 +19,7 @@ export default function EmailModal({}) {
             roomLink: user.ux.emailModal.roomLink,
             message: message
         });
-        console.log(response);
+
         if (response.success) {
             setEmail('');
             setMessage('');

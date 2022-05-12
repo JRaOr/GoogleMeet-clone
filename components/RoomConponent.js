@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import MultipleParticipants from './MultipleParticipants';
 import TrackVideoParticipant from './TrackVideoParticipant';
-export default function RoomComponent( { room, participants, track, user, showChat} ) {
+export default function RoomComponent( { room, participants, track, user, showChat, dominantSpeaker} ) {
     const videoRef = useRef(null);
     const people = participants.length + 1
     // const people = 9
@@ -39,7 +39,7 @@ export default function RoomComponent( { room, participants, track, user, showCh
             {participants.map((participant, index)=> {
                 if( people > 9 && index > 6 ) return null
                 return(
-                    <TrackVideoParticipant key={`participant-box-${participant.sid}`} participant={participant} index={index}/>
+                    <TrackVideoParticipant dominant={dominantSpeaker?.sid === participant.sid} key={`participant-box-${participant.sid}`} participant={participant} index={index}/>
                 )
             })}
             {people > 9 && <MultipleParticipants participants={participants.slice(7, participants.length)}/>}

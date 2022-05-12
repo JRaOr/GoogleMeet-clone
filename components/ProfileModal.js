@@ -79,7 +79,6 @@ export default function ProfileModal({ user }) {
             return;
         }
         const response = await Api.getInstance().uploadUserImage(file);
-        console.log(response)
         if (response.success) {
             dispatch(fillUser())
             dispatch(showToast({

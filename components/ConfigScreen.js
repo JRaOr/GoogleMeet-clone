@@ -13,7 +13,6 @@ export default function ConfigScreen( { joinRoom, track, isLocal, priority, togg
     const mediaStreamTrack = useMediaStreamTrack(localAudioTrack);
     const localAudioInputDeviceId = mediaStreamTrack?.getSettings().deviceId;
 
-    console.log('localAudioInputDeviceId:', localAudioInputDeviceId)
     function replaceTrack(newDeviceId) {
         window.localStorage.setItem(SELECTED_AUDIO_INPUT_KEY, newDeviceId);
         localAudioTrack?.restart({ deviceId: { exact: newDeviceId } });

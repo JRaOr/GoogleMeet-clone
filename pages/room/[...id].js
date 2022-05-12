@@ -32,7 +32,7 @@ export default function Room({ id }) {
     const { localTracks, getLocalAudioTrack, getLocalVideoTrack, removeLocalAudioTrack, removeLocalVideoTrack } = useLocalTracks();
     const { room, isConnecting, connect } = useRoom(localTracks, ()=>{
         console.error("Could not connect to room");
-    }, {})
+    }, { dominantSpeaker: true })
     const roomState = useRoomState(room);
     const dominantSpeaker = useDominantSpeaker(room);
     const participants = useParticipants(room);
@@ -69,15 +69,7 @@ export default function Room({ id }) {
         }
     }, [])
 
-    useEffect(() => {
-        console.log('participants:', participants)
-    }, [participants])
-
-    useEffect(() => {
-        console.log('Room:', room)
-    }, [room?.participants])
     async function joinRoom() {
-        console.log('Joining room...');
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}/room/join/${id}`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -112,15 +104,14 @@ export default function Room({ id }) {
         return newParticipants
     }
 
-
     return (
         <>
             {roomState === 'disconnected' ? 
                 <ConfigScreen localTracks={localTracks} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} joinRoom={joinRoom} track={videoTrack} isLocal/>
                 :
                 <RoomContainer>
-                    <div className={`h-full flex relative items-center`}>
-                        <RoomComponent showChat={showChat} user={user} track={videoTrack} participants={participants} room={room}/>
+                    <div className={`h-full flex relative items-center justify-center`}>
+                        <RoomComponent dominantSpeaker={dominantSpeaker} showChat={showChat} user={user} track={videoTrack} participants={participants} room={room}/>
                         <Comments show={showChat} handleClose={handleClose} user={user} room_name={room.name}/>
                     </div>
                     <Controls participants={participants.length + 1} toggleChat={toggleChat} toggleAudioButton={toggleAudioButton} toggleVideoButton={toggleVideoButton} room={room}/>

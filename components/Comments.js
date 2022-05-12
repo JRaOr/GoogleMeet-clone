@@ -30,7 +30,6 @@ export default function Comments( { show, handleClose, room_name, user }){
             });
         }
         const unSub = onSnapshot(doc(db, 'chatrooms', room_name[0]), (doc) => {
-            console.log('Current data', doc.data())
             setMessages(doc.data().messages)
         })
     }
