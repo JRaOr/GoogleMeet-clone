@@ -26,6 +26,7 @@ export default function Layout({ children }){
             }
         } else {
             dispatch(signout());
+            router.push('/')
         }
     }
 

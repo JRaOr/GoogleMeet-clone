@@ -52,7 +52,7 @@ export default function EmailModal({}) {
                 <div className='modal-main'>
                     <h3 className='text-xl'>Enviar invitacion por email.</h3>
                     <p className='mt-3 text-sm text-slate-400'>
-                        Por cuestiones de seguridad y pruebas, solo podras enviar una invitacion por email.    
+                        Por cuestiones de seguridad y pruebas, solo podras enviar una invitacion por email. (Nota: Toman unos minutos en llegar, pero llegan.) 
                     </p>
                     <div className='flex justify-center mt-3 flex-col'>
                         <input value={email} onChange={(e)=> setEmail(e.target.value)} className='w-full rounded-md p-2 bg-transparent border-[2px] border-slate-700 focus:border-sky-600 outline-none' type='text' placeholder='Email'/>
