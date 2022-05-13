@@ -25,8 +25,7 @@ export default function Layout({ children }){
                 dispatch(fillUser())
             }
         } else {
-            dispatch(signout());
-            router.push('/')
+            router.push('/signin')
         }
     }
 
