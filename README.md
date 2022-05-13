@@ -1,7 +1,7 @@
 # Google Meet Clone Server
 
 > Descripcion: Clon de Google Meet creado unicamente para fines didacticos y con mucha suerte ganar un
-> nuevo teclado, participando en la Twilio Hackathon de [midudev](https://github.com/midudev).
+> nuevo teclado, participando en la Twilio Hackathon de [midudev](https://github.com/midudev) [twitch](https://www.twitch.tv/midudev).
 
 - Server Link: https://github.com/JRaOr/GoogleMeet-clone-server
 - Frontend Application Link: https://github.com/JRaOr/GoogleMeet-clone
