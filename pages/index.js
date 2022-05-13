@@ -34,7 +34,7 @@ export default function Home(){
                     </p>
                     <div className="flex flex-col md:flex-row gap-5 md:gap-0">
                         <button onClick={()=>{ createRoom() }} className="bg-[#1a73e8] hover:bg-[#1a6dde] max-w-[170px] text-white font-semibold py-2 px-4 rounded flex items-center transition-grl mr-6">
-                            <AiOutlineVideoCameraAdd className="mr-3"/> Reunion nueva
+                            <AiOutlineVideoCameraAdd className="mr-3"/> Reunión nueva
                         </button>
                         <div className="flex">
                             <div className={` border-2 flex items-center py-2 px-4 gap-2 w-full max-w-[262px] rounded-md ${focusButton && 'border-blue-500'}`}>

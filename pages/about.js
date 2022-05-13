@@ -15,8 +15,8 @@ export default function About() {
                     <img className="w-[120px] h-[120px] rounded-md object-contain" src="/media/Tech/meet.png"/>
                     <div className="font-semibold ml-5 flex flex-col items-center sm:items-start">
                         <h2 className="text-lg">Google Meet Clone</h2>
-                        <p>Version: <span className=" text-slate-600 font-normal">v1.0.1</span></p>
-                        <h3 className=' text-center sm:text-left'>Descripcion: <span className=" font-normal text-slate-600">Clon de Google Meet, creado unicamente con propositos didacticos.</span></h3>
+                        <p>Versión: <span className=" text-slate-600 font-normal">v1.0.1</span></p>
+                        <h3 className=' text-center sm:text-left'>Descripción: <span className=" font-normal text-slate-600">Clon de Google Meet, creado unicamente con propositos didacticos.</span></h3>
                     </div>
                 </div>
                 <div className="w-full md:w-[50%] p-2 relative flex items-center flex-col sm:flex-row mt-5 sm:mt-0">

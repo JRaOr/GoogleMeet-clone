@@ -37,23 +37,23 @@ export default function HelpComponent() {
     ]
     const questions = [
         {
-            question: '¿Donde se puede conseguir el codigo fuente?',
-            answer: <>Puedes conseguir acceso al codigo fuente en el siguiente repositorio: <a className='text-sky-400' href="https://github.com/JRaOr/GoogleMeet-clone" target={'_blank'} rel='noopener noreferrer'>Google Meet Clone</a></>
+            question: '¿Dónde se puede conseguir el código fuente?',
+            answer: <>Puedes conseguir acceso al código fuente en el siguiente repositorio: <a className='text-sky-400' href="https://github.com/JRaOr/GoogleMeet-clone" target={'_blank'} rel='noopener noreferrer'>Google Meet Clone</a></>
         },
         {
-            question: '¿Donde puedo registrarme para usar el proyecto?',
+            question: '¿Dónde puedo registrarme para usar el proyecto?',
             answer: <>Crea una cuenta en el siguiente enlace: <Link href={'/signup'}><a className='text-sky-400'>Registrar</a></Link> </>
         },
         {
             question: '¿Cómo se puede ingresar?',
-            answer: <>Despues de registrarte, inicia sesion con tu usuario y contraseña en el sigiente enlace: <Link href={'/signin'}><a className='text-sky-400'>Iniciar sesion</a></Link></>
+            answer: <>Después de registrarte, inicia sesión con tu usuario y contraseña en el sigiente enlace: <Link href={'/signin'}><a className='text-sky-400'>Iniciar sesión</a></Link></>
         },
         {
             question: '¿Cómo se puede reportar un problema?',
-            answer: <>Para reportar un problema, puedes contactarme en cualquiera de las redes sociales mostradas arriba o en el inicio de sesion.</>
+            answer: <>Para reportar un problema, puedes contactarme en cualquiera de las redes sociales mostradas arriba o en el inicio de sesión.</>
         },
         {
-            question: '¿Sobre que tecnologias se basa el proyecto?',
+            question: '¿Sobre qué tecnologías se basa el proyecto?',
             answer: <>
                         <ul className='flex flex-col items-start gap-3'>
                             {techs.map((tech, index) => (
@@ -70,35 +70,35 @@ export default function HelpComponent() {
         {
             question: '¿Cómo puedo cambiar mi foto de perfil?',
             answer: <>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>1.</span> Inicia sesion</p>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>2.</span> Da click en el circulo donde se muestra la inicial de tu nombre de usuario</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>1.</span> Inicia sesión.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>2.</span> Da click en el circulo donde se muestra la inicial de tu nombre de usuario.</p>
                         <img src='/media/help/profile1.png' className='shadow-md mt-2'/>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>3.</span> En el menu, da click en el icono de la camara para abrir el modal para cambiar tu foto.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>3.</span> En el menú, da click en el icono de la cámara para abrir el modal para cambiar tu foto.</p>
                         <img src='/media/help/profile2.png' className='shadow-md mt-2'/>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>4.</span> Da click en el boton de cambiar para seleccionar una imagen predefinida o poder cargar una desde tu equipo.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>4.</span> Da click en el botón de cambiar para seleccionar una imagen predefinida o poder cargar una desde tu equipo.</p>
                         <img src='/media/help/profile3.png' className='shadow-md mt-2'/>
                         <p className='mt-2 text-slate-700'><span className='font-semibold'>5.</span> Cambia tu foto!</p>
                         <img src='/media/help/profile4.png' className='shadow-md mt-2'/>
                     </>
         },
         {
-            question: '¿Cómo puedo crear una nueva reunion o unirme a una con codigo?',
+            question: '¿Cómo puedo crear una nueva reunión o unirme a una con código?',
             answer: <>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>1.</span> Inicia sesion</p>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>2.</span> Da click en el boton Reunion nueva en la pantalla principal.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>1.</span> Inicia sesión.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>2.</span> Da click en el botón Reunión nueva en la pantalla principal.</p>
                         <img src='/media/help/new-meeting1.png' className='shadow-md mt-2'/>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>3.</span> Ingresa el codigo de la reunion y da click en Unirse.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>3.</span> Ingresa el código de la reunión y da click en Unirse.</p>
                         <img src='/media/help/new-meeting2.png' className='shadow-md mt-2'/>
                     </>
         },
         {
-            question: '¿Cómo puedo invitar a un amigo a una reunion?',
+            question: '¿Cómo puedo invitar a un amigo a una reunión?',
             answer: <>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>A:</span> Usando el codigo en la parte inferior izquierda de la reunion.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>A:</span> Usando el código en la parte inferior izquierda de la reunion.</p>
                         <img src='/media/help/invite1.png' className='shadow-md mt-2'/>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>B:</span> En el boton de compartir, puedes copiar el link de la reunion.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>B:</span> En el botón de compartir, puedes copiar el link de la reunión.</p>
                         <img src='/media/help/invite2.png' className='shadow-md mt-2'/>
-                        <p className='mt-2 text-slate-700'><span className='font-semibold'>C:</span> En el boton de compartir, puedes enviar un email con la invitacion a un amigo.</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>C:</span> En el botón de compartir, puedes enviar un email con la invitación a un amigo.</p>
                         <img src='/media/help/invite3.png' className='shadow-md mt-2'/>
                     </>
         }
