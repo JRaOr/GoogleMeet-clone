@@ -66,6 +66,41 @@ export default function HelpComponent() {
                             ))}
                         </ul>
                     </>
+        },
+        {
+            question: '¿Cómo puedo cambiar mi foto de perfil?',
+            answer: <>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>1.</span> Inicia sesion</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>2.</span> Da click en el circulo donde se muestra la inicial de tu nombre de usuario</p>
+                        <img src='/media/help/profile1.png' className='shadow-md mt-2'/>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>3.</span> En el menu, da click en el icono de la camara para abrir el modal para cambiar tu foto.</p>
+                        <img src='/media/help/profile2.png' className='shadow-md mt-2'/>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>4.</span> Da click en el boton de cambiar para seleccionar una imagen predefinida o poder cargar una desde tu equipo.</p>
+                        <img src='/media/help/profile3.png' className='shadow-md mt-2'/>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>5.</span> Cambia tu foto!</p>
+                        <img src='/media/help/profile4.png' className='shadow-md mt-2'/>
+                    </>
+        },
+        {
+            question: '¿Cómo puedo crear una nueva reunion o unirme a una con codigo?',
+            answer: <>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>1.</span> Inicia sesion</p>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>2.</span> Da click en el boton Reunion nueva en la pantalla principal.</p>
+                        <img src='/media/help/new-meeting1.png' className='shadow-md mt-2'/>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>3.</span> Ingresa el codigo de la reunion y da click en Unirse.</p>
+                        <img src='/media/help/new-meeting2.png' className='shadow-md mt-2'/>
+                    </>
+        },
+        {
+            question: '¿Cómo puedo invitar a un amigo a una reunion?',
+            answer: <>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>A:</span> Usando el codigo en la parte inferior izquierda de la reunion.</p>
+                        <img src='/media/help/invite1.png' className='shadow-md mt-2'/>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>B:</span> En el boton de compartir, puedes copiar el link de la reunion.</p>
+                        <img src='/media/help/invite2.png' className='shadow-md mt-2'/>
+                        <p className='mt-2 text-slate-700'><span className='font-semibold'>C:</span> En el boton de compartir, puedes enviar un email con la invitacion a un amigo.</p>
+                        <img src='/media/help/invite3.png' className='shadow-md mt-2'/>
+                    </>
         }
     ]
     return (
@@ -78,7 +113,7 @@ export default function HelpComponent() {
                         } else {
                             setSelected(index)
                         }
-                    }} className="w-full p-2 border-b-[1px] border-slate-300 flex justify-between items-center cursor-pointer hover:bg-gray-100 select-none transition-grl" key={index}>
+                    }} className="w-full font-semibold p-2 border-b-[1px] border-slate-300 flex justify-between items-center cursor-pointer hover:bg-gray-100 select-none transition-grl" key={index}>
                         <h2 className="">{item.question}</h2>
                         {selected != index ? <IoIosArrowForward/>:<IoIosArrowDown/>}
                     </div>
