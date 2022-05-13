@@ -16,7 +16,7 @@
 - [AWS](https://aws.amazon.com/es/) - Amazon Web Services, Route53, SNS, S3
 - [MongoAtlas](https://www.mongodb.com/) - Working with data doesn’t need to be hard
 - [Railway](https://railway.app/) - Railway is a deployment platform where you can provision infrastructure, develop with that infrastructure locally, and then deploy to the cloud.
-
+- [Firebase](https://firebase.google.com/) - Sincronización en tiempo real para datos JSON
 ### Instalacion de Frontend
 
 Instalacion de dependencias!
