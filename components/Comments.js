@@ -21,15 +21,15 @@ export default function Comments( { show, handleClose, room_name, user }){
 
     async function getFirestoreData(){
         const chatrooms = collection(db, "chatrooms");
-        const q = query(chatrooms, where("room_name", "==", room_name[0]));
+        const q = query(chatrooms, where("room_name", "==", room_name));
         const querySnapshot = await getDocs(q);
         if(querySnapshot.size === 0){
-            await setDoc(doc(db, 'chatrooms', room_name[0]), {
-                room_name: room_name[0],
+            await setDoc(doc(db, 'chatrooms', room_name), {
+                room_name: room_name,
                 messages: []
             });
         }
-        const unSub = onSnapshot(doc(db, 'chatrooms', room_name[0]), (doc) => {
+        const unSub = onSnapshot(doc(db, 'chatrooms', room_name), (doc) => {
             setMessages(doc.data().messages)
         })
     }
@@ -45,7 +45,7 @@ export default function Comments( { show, handleClose, room_name, user }){
 
     async function sendMessage(event){
         event.preventDefault();
-        const updateRef = doc(db, 'chatrooms', room_name[0]);
+        const updateRef = doc(db, 'chatrooms', room_name);
         const response = await getDoc(updateRef);
         await updateDoc(updateRef, {
             messages: [...response.data().messages, {
@@ -90,7 +90,7 @@ export default function Comments( { show, handleClose, room_name, user }){
                                         {messages.map((message, index)=>{
                                             let userowns = message.user === user.username;
                                             return (
-                                                <div key={`message-${room_name[0]}-${index}`} className={`w-full flex items-end ${userowns ? 'flex-row-reverse':'' }`}>
+                                                <div key={`message-${room_name}-${index}`} className={`w-full flex items-end ${userowns ? 'flex-row-reverse':'' }`}>
                                                     {(!userowns && messages[index - 1]?.user != message.user)  && 
                                                         <> 
                                                             <img data-tip data-for={`image-tool-${index}`} src={message?.image ? message.image : '/media/profile.png'} className="rounded-full w-12 h-12 mr-2 bg-blue-300"/>
