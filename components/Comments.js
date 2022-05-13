@@ -74,7 +74,7 @@ export default function Comments( { show, handleClose, room_name, user }){
             { show ?
                 <section onAnimationEnd={()=>{
                     setAnimationchat(true)
-                }} className="animation-box absolute right-0 sm:relative z-[2]">
+                }} className="animation-box absolute right-0 sm:relative z-[2] ml-auto">
                     <div className="h-full w-full bg-white rounded-md shadow-xl p-5">
                         {animationchat &&     
                             <div className="flex relative h-full items-center flex-col w-full animation-fadeleft text-slate-800">

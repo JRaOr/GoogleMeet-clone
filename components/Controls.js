@@ -46,7 +46,7 @@ export default function Controls( { room, toggleAudioButton, toggleVideoButton, 
     }
 
     const _mobileMenu = () => (
-        <ul className='absolute cursor-pointer rounded-md right-2 bottom-[100px] py-2 text-lg bg-white w-[300px] text-slate-700 animation-fadeleft shadow-lg'>
+        <ul className='absolute cursor-pointer rounded-md right-2 bottom-[100px] py-2 text-lg bg-white w-[300px] text-slate-700 animation-fadeleft shadow-lg z-[5]'>
             <li className='flex items-center px-5 hover:bg-slate-100 py-2 transition-grl' >
                 <IoMdInformationCircleOutline className='text-xl'/> <span className='ml-5'>Detalles de la reunion</span>
             </li>

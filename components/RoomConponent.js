@@ -20,7 +20,7 @@ export default function RoomComponent( { room, participants, track, user, showCh
 
     const _videoTrack = () => (
         <>
-            { track ? <video className="h-[100%] object-cover" ref={videoRef}/> :
+            { track ? <video className="h-[100%] object-cover rounded-md" ref={videoRef}/> :
             <div className="w-[100%] h-[100%] flex items-center justify-center">
                 <img src={user.avatar ? user.avatar : '/media/profile.png'} className="w-[150px] h-[150px] object-cover rounded-full"/>
             </div>}
@@ -29,7 +29,7 @@ export default function RoomComponent( { room, participants, track, user, showCh
 
     if(participants.length === 0){
         return(
-            <section className={`w-full flex items-center max-w-[1440px] h-full justify-center ${showChat && 'p-5'}`}>
+            <section className={`w-full flex items-center max-w-[1440px] p-5 md:h-full justify-center ${showChat ? 'p-5':'md:p-0'}`}>
                 {_videoTrack()}
             </section>
         )
